@@ -16,18 +16,6 @@ namespace MathsFunctions.Library
             return total / numbers.Length;
         }
 
-        public double Sum(IEnumerable<double> numbers)
-        {
-            double total = 0;
-
-            foreach (var number in numbers)
-            {
-                total += number;
-            }
-
-            return total;
-        }
-
         public double StandardDeviation(double[] numbers)
         {
             if (numbers == null || numbers.Length == 0)
@@ -59,6 +47,18 @@ namespace MathsFunctions.Library
             }
 
             return bins;
+        }
+
+        private double Sum(IEnumerable<double> numbers)
+        {
+            double total = 0;
+
+            foreach (var number in numbers)
+            {
+                total += number;
+            }
+
+            return total;
         }
 
         private FrequencyBin[] CreateFrequencyBins()
