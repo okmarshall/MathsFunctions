@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MathsFunctions.Library
@@ -15,7 +16,7 @@ namespace MathsFunctions.Library
             return total / numbers.Length;
         }
 
-        public double Sum(double[] numbers)
+        public double Sum(IEnumerable<double> numbers)
         {
             double total = 0;
 
@@ -29,9 +30,18 @@ namespace MathsFunctions.Library
 
         public double StandardDeviation(double[] numbers)
         {
+            if (numbers == null || numbers.Length == 0)
+                throw new ArgumentException("Cannot calculate the standard deviation of a zero-length array!");
+
             var mean = Mean(numbers);
 
-            return Math.Sqrt(Sum(numbers.Select(x => (x - mean) * (x - mean)).ToArray()) / numbers.Length);
+            var numbersWithMeanSubtracted = numbers.Select(n => n - mean);
+
+            var numbersWithMeanSubtractedAndSquared = numbersWithMeanSubtracted.Select(n => n * n);
+
+            var variance = Sum(numbersWithMeanSubtractedAndSquared) / numbers.Length;
+
+            return Math.Sqrt(variance);
         }
     }
 }

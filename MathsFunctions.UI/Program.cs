@@ -11,15 +11,19 @@ namespace MathsFunctions.UI
             try
             {
                 var fileHandler = new FileHandler();
+
                 var functions = new Functions();
 
-                var stringArray = fileHandler.CsvFileToArray("SampleData.csv");
+                var array = fileHandler.CsvFileToArray("SampleData.csv");
 
-                var numbers = Array.ConvertAll(stringArray, decimal.Parse);
+                var numbers = Array.ConvertAll(array, double.Parse);
 
                 var mean = functions.Mean(numbers);
 
-                Console.WriteLine($"Mean: {mean}");
+                var standardDeviation = functions.StandardDeviation(numbers);
+
+                Console.WriteLine($"Mean: { mean }");
+                Console.WriteLine($"Standard Deviation: { standardDeviation }");
             }
             catch(Exception)
             {
