@@ -26,7 +26,7 @@ namespace MathsFunctions.UI
 
                 foreach (var bin in frequencyBins)
                 {
-                    Console.WriteLine($"Min:{ bin.Minimum }, Max:{ bin.Maximum }, Freq:{ bin.Frequency }");
+                    Console.WriteLine($"LowerBound:{ bin.LowerBound }, UpperBound:{ bin.UpperBound }, Freq:{ bin.Frequency }");
                 }
             }
             catch(Exception)

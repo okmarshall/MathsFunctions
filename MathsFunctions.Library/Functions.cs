@@ -46,11 +46,15 @@ namespace MathsFunctions.Library
 
         public FrequencyBin[] CalculateFrequencyBins(double[] numbers)
         {
+            if(numbers == null || numbers.Length == 0)
+                throw new ArgumentException("Cannot calculate the frequency distribution of a zero-length array!");
+                
             var bins = CreateFrequencyBins();
 
             foreach (var number in numbers)
             {
-                var bin = bins.Where(b => b.LowerBound <= number && b.UpperBound > number).First();
+                var bin = bins.First(b => b.LowerBound <= number && b.UpperBound > number);
+
                 bin.Frequency += 1;
             }
 
