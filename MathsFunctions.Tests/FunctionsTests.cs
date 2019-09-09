@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using MathsFunctions.Library;
 using NUnit.Framework;
 
@@ -73,6 +74,41 @@ namespace Tests
             var standardDeviation = functions.StandardDeviation(numbers);
 
             Assert.AreEqual(0.66918, Math.Round(standardDeviation, 5));
+        }
+
+        [Test]
+        public void When_An_Array_Of_Doubles_Is_Passed_To_Calculate_Frequency_Bins_Then_The_Correct_Frequency_Bins_Are_Returned()
+        {
+            var functions = new Functions();
+            var numbers = new double[]
+            {
+                5,
+                10, 11,
+                20, 21, 22,
+                30, 31, 32, 33,
+                40, 41, 42, 43, 44,
+                50, 51, 52, 53, 54, 55,
+                60, 61, 62, 63, 64, 65, 66,
+                70, 71, 72, 73, 74, 75, 76, 77,
+                80, 81, 82, 83, 84, 85, 86, 87, 88,
+                90, 91, 92, 93, 94,95, 96, 97, 98, 99
+            };
+
+            var bins = functions.CalculateFrequencyBins(numbers).OrderBy(b => b.LowerBound).ToArray();
+
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(bins[0].Frequency, 1);
+                Assert.AreEqual(bins[1].Frequency, 2);
+                Assert.AreEqual(bins[2].Frequency, 3);
+                Assert.AreEqual(bins[3].Frequency, 4);
+                Assert.AreEqual(bins[4].Frequency, 5);
+                Assert.AreEqual(bins[5].Frequency, 6);
+                Assert.AreEqual(bins[6].Frequency, 7);
+                Assert.AreEqual(bins[7].Frequency, 8);
+                Assert.AreEqual(bins[8].Frequency, 9);
+                Assert.AreEqual(bins[9].Frequency, 10);
+            });
         }
     }
 }
