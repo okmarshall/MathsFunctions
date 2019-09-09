@@ -1,4 +1,5 @@
 ﻿using System;
+using MathsFunctions.Library.Files;
 
 namespace MathsFunctions.UI
 {
@@ -6,7 +7,18 @@ namespace MathsFunctions.UI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                var fileHandler = new FileHandler();
+
+                var stringArray = fileHandler.CsvFileToArray("SampleData.csv");
+
+                var numbers = Array.ConvertAll(stringArray, decimal.Parse);
+            }
+            catch(Exception ex)
+            {
+                
+            } 
         }
     }
 }
